@@ -67,43 +67,4 @@ class CrawlWebsiteView(APIView):
                                 sparql.query()
                     except ValueError:
                         continue
-
-
-# class CrawlWebsiteView(APIView):
-#     serializer_class = CrawlWebsiteSerializer
-
-#     def post(self, request):
-#         serializer = self.serializer_class(data=request.data)
-#         if serializer.is_valid():
-#             url = serializer.validated_data['url']
-
-#             # Crawl the website
-#             response = requests.get(url)
-#             soup = BeautifulSoup(response.text, 'html.parser')
-
-#             # Create a new RDF graph
-#             # store = plugin_get('SPARQLUpdateStore', Store)()
-#             g = ConjunctiveGraph('SPARQLStore')
-#             g.open(f"http://{settings.GRAPHDB['HOST']}:{settings.GRAPHDB['PORT']}/repositories/{settings.GRAPHDB['REPOSITORY']}")
-
-#             # Parse the crawled data and convert it into RDF triples
-#             for link in soup.find_all('a'):
-#                 href = link.get('href')
-#                 if href is not None:
-#                     href = urljoin(url, href)
-#                     try:
-#                         result = urlparse(href)
-#                         if all([result.scheme, result.netloc]):
-#                             node = URIRef(f"http://example.com/resource/{uuid4()}")  # Create a unique URI for each node
-#                             g.add((node, RDF.type, FOAF.Document))  # The node is a foaf:Document
-#                             g.add((node, FOAF.title, Literal(link.text)))  # The document's title is the link text
-#                             g.add((node, FOAF.page, URIRef(href)))  # The document's page is the link URL
-#                     except ValueError:
-#                         continue
-#             # Write the RDF triples to GraphDB
-#             g.commit()
-
-#             return Response({'status': 'success'})
-#         else:
-#             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+                    
