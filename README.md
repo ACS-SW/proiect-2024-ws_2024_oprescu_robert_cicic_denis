@@ -5,7 +5,7 @@ This application provides a simple API for crawling a website and extracting all
 Fork and clone this repo onto your machine and execute:        
   -  `$ cd backend`
   -  `$ docker-compose up`
-  -  `docker-compose exec web python manage.py migrate`
+  -  `$ docker-compose exec web python manage.py migrate`
 
 Set up GraphDB repository by going to `localhost:7200 --> Setup --> Repositories --> Create new repository --> GraphDB repository --> Repository ID*: main-repo, Ruleset: RDFS --> Create --> Click the "connect" button on main-repo`
 
