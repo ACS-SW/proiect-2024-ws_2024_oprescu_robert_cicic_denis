@@ -1,4 +1,4 @@
-# Semantic Web Crawler API (With GraphDB) for Ontologically Related Data
+# Semantic Historical Record Query Tool (With GraphDB) for Ontologically Related Data
 This application provides a simple API for interacting with historical data in a semantically meaningful way using RDF graphs.
 
 ## Setup
