@@ -10,6 +10,8 @@ Fork and clone this repo onto your machine and execute:
 Set up GraphDB repository by going to `localhost:7200 --> Setup --> Repositories --> Create new repository --> GraphDB repository --> Repository ID*: main-repo, Ruleset: RDFS --> Create --> Click the "connect" button on main-repo`
 
 ## Features
+- (new) Bulk upload now lets you upload a turtle file at /api/upload/ and will generate the ontology by extracting the years and calculating the centuries for the entire file
+- (new) Downloading all triples from GraphDB is now available in rdf format
 - Search historical events by year, at "/api/search/". This endpoint allows you to set limit for the number of triples (10 to 20 is recommended), language and offset (number of triples skipped from the beginning of the response)
 - Visualize data by going to `localhost:7200/graphs --> The default graph --> select a resource (try selecting a year or century of rdf:type) then click Visual graph and then expand the nodes`, `localhost:7200/relationships` or `localhost:7200/hierarchy`
 - (Deprecated) Crawl Website: The API provides an endpoint (/api/crawl/) that accepts a POST request with a URL in the request body. The application will then crawl the website at the given URL and extract all the links from it.
