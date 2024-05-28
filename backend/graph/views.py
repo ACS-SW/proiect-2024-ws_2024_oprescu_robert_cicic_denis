@@ -14,62 +14,7 @@ import re
 from django.http import FileResponse
 from rest_framework.response import Response
 from rest_framework import status
-import pandas as pd
 from urllib.parse import quote_plus
-
-# class BulkUploadView(APIView):
-#     serializer_class = BulkUploadSerializer
-    
-#     def post(self, request):
-#         # Get the .ttl file from the request
-#         ttl_file = request.FILES['file']
-
-#         # Load the .ttl file into an rdflib Graph
-#         g = Graph()
-#         g.parse(data=ttl_file.read().decode('utf-8'), format="turtle")
-
-#         # Define your ontology's namespace
-#         n = Namespace("http://example.com/")
-
-#         # Create a new graph for the modified triples
-#         g_modified = Graph()
-
-#         # Load the .ttl file into an rdflib Graph in chunks
-#         for chunk in pd.read_csv(ttl_file, chunksize=20):
-#             g = Graph()
-#             g.parse(data=chunk.decode('utf-8'), format="turtle")
-
-#             # Iterate over the triples in the graph
-#             for s, p, o in g:
-#                 # If the object of the triple is a number formatted as a year (YYYY)
-#                 if re.fullmatch(r'\d{4}', str(o)):
-#                     # Get the year from the object of the triple
-#                     year = str(o)
-
-#                     # Calculate the century from the year
-#                     century = (int(year) - 1) // 100 + 1
-
-#                     # Add the necessary triples to the new graph
-#                     g_modified.add((s, RDF.type, n.Event))
-#                     g_modified.add((URIRef(f"http://example.com/{year}"), RDF.type, n.Year))
-#                     g_modified.add((URIRef(f"http://example.com/{century}"), RDF.type, n.Century))
-#                     g_modified.add((s, n.hasYear, URIRef(f"http://example.com/{year}")))
-#                     g_modified.add((URIRef(f"http://example.com/{year}"), n.hasCentury, URIRef(f"http://example.com/{century}")))
-
-#         # Serialize the modified graph to a string in Turtle format
-#         ttl_data = g_modified.serialize(format='turtle').decode('utf-8')
-        
-#         # Define the URL for the GraphDB repository
-#         url = f"http://{settings.GRAPHDB['HOST']}:{settings.GRAPHDB['PORT']}/repositories/main-repo/rdf-graphs/service?default"
-
-#         # Send a POST request to the GraphDB repository to upload the .ttl data
-#         response = requests.post(url, headers={"Content-Type": "application/x-turtle"}, data=ttl_data)
-
-#         # Check if the request was successful
-#         if response.status_code == 204:
-#             return Response({"message": "Bulk upload successful"}, status=status.HTTP_200_OK)
-#         else:
-#             return Response({"error": "Bulk upload failed"}, status=status.HTTP_400_BAD_REQUEST)
         
 class BulkUploadView(APIView):
     serializer_class = BulkUploadSerializer
