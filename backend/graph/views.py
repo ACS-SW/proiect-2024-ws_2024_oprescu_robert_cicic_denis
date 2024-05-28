@@ -1,16 +1,167 @@
 from django.conf import settings
-from rdflib import URIRef, Literal, Graph
-from rdflib.namespace import RDF, FOAF
+from rdflib import URIRef, Literal, Graph, BNode, Namespace
+from rdflib.namespace import RDF, FOAF, DC
 import requests
 from bs4 import BeautifulSoup
 from rest_framework import status
 from rest_framework.response import Response
 from uuid import uuid4
-from .serializers import CrawlWebsiteSerializer, SearchYAGOSerializer
+from .serializers import CrawlWebsiteSerializer, SearchYAGOSerializer, BulkUploadSerializer
 from rest_framework.views import APIView
 from urllib.parse import urlparse, urljoin
 from urllib.parse import quote
 import re
+from django.http import FileResponse
+from rest_framework.response import Response
+from rest_framework import status
+import pandas as pd
+from urllib.parse import quote_plus
+
+# class BulkUploadView(APIView):
+#     serializer_class = BulkUploadSerializer
+    
+#     def post(self, request):
+#         # Get the .ttl file from the request
+#         ttl_file = request.FILES['file']
+
+#         # Load the .ttl file into an rdflib Graph
+#         g = Graph()
+#         g.parse(data=ttl_file.read().decode('utf-8'), format="turtle")
+
+#         # Define your ontology's namespace
+#         n = Namespace("http://example.com/")
+
+#         # Create a new graph for the modified triples
+#         g_modified = Graph()
+
+#         # Load the .ttl file into an rdflib Graph in chunks
+#         for chunk in pd.read_csv(ttl_file, chunksize=20):
+#             g = Graph()
+#             g.parse(data=chunk.decode('utf-8'), format="turtle")
+
+#             # Iterate over the triples in the graph
+#             for s, p, o in g:
+#                 # If the object of the triple is a number formatted as a year (YYYY)
+#                 if re.fullmatch(r'\d{4}', str(o)):
+#                     # Get the year from the object of the triple
+#                     year = str(o)
+
+#                     # Calculate the century from the year
+#                     century = (int(year) - 1) // 100 + 1
+
+#                     # Add the necessary triples to the new graph
+#                     g_modified.add((s, RDF.type, n.Event))
+#                     g_modified.add((URIRef(f"http://example.com/{year}"), RDF.type, n.Year))
+#                     g_modified.add((URIRef(f"http://example.com/{century}"), RDF.type, n.Century))
+#                     g_modified.add((s, n.hasYear, URIRef(f"http://example.com/{year}")))
+#                     g_modified.add((URIRef(f"http://example.com/{year}"), n.hasCentury, URIRef(f"http://example.com/{century}")))
+
+#         # Serialize the modified graph to a string in Turtle format
+#         ttl_data = g_modified.serialize(format='turtle').decode('utf-8')
+        
+#         # Define the URL for the GraphDB repository
+#         url = f"http://{settings.GRAPHDB['HOST']}:{settings.GRAPHDB['PORT']}/repositories/main-repo/rdf-graphs/service?default"
+
+#         # Send a POST request to the GraphDB repository to upload the .ttl data
+#         response = requests.post(url, headers={"Content-Type": "application/x-turtle"}, data=ttl_data)
+
+#         # Check if the request was successful
+#         if response.status_code == 204:
+#             return Response({"message": "Bulk upload successful"}, status=status.HTTP_200_OK)
+#         else:
+#             return Response({"error": "Bulk upload failed"}, status=status.HTTP_400_BAD_REQUEST)
+        
+class BulkUploadView(APIView):
+    serializer_class = BulkUploadSerializer
+
+    def post(self, request):
+        # Get the .ttl file from the request
+        ttl_file = request.FILES['file']
+
+        # Define the URL for the GraphDB repository
+        new_graph_uri = "http://example.com/newgraph"
+        url = f"http://{settings.GRAPHDB['HOST']}:{settings.GRAPHDB['PORT']}/repositories/main-repo/rdf-graphs/service?graph={quote_plus(new_graph_uri)}"
+
+        # Send a POST request to the GraphDB repository to upload the .ttl data
+        response = requests.post(url, headers={"Content-Type": "application/x-turtle"}, data=ttl_file.read())
+
+        # Check if the request was successful
+        if response.status_code != 204:
+            return Response({"error": "Bulk upload failed"}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Define your ontology's namespace
+        n = Namespace("http://example.com/")
+        
+        onto_graph = "http://example.com/historical-onto"
+
+        # Define the SPARQL query to construct the ontology
+        query = f"""
+            PREFIX ex: <{n}>
+            DELETE {{
+                GRAPH <{new_graph_uri}> {{
+                    ?s ?p ?o .
+                }}
+            }}
+            INSERT {{
+                ?s a ex:Event .
+                ?year a ex:Year .
+                ?century a ex:Century .
+                ?s ex:hasYear ?year .
+                ?year ex:hasCentury ?century .
+            }}
+            WHERE {{
+                GRAPH <{new_graph_uri}> {{
+                    ?s ?p ?o .
+                    BIND(xsd:integer(SUBSTR(STR(?o), 1, 4)) AS ?yearValue)
+                    FILTER (?yearValue >= 1000 && ?yearValue <= 9999)
+                    BIND (IRI(concat(str(ex:), str(?yearValue))) AS ?year)
+                    BIND (IRI(concat(str(ex:), str(FLOOR((?yearValue - 1) / 100 + 1)))) AS ?century)
+                }}
+            }}
+            ;
+            CLEAR GRAPH <{new_graph_uri}>
+        """
+        
+        graphdb_headers = {
+            'Content-Type': 'application/sparql-update',
+        }
+
+        # Send the SPARQL query to the GraphDB repository
+        # url = f"http://{settings.GRAPHDB['HOST']}:{settings.GRAPHDB['PORT']}/repositories/main-repo"
+        url = f"http://{settings.GRAPHDB['HOST']}:{settings.GRAPHDB['PORT']}/repositories/{settings.GRAPHDB['REPOSITORY']}/statements"
+        response = requests.post(url, headers=graphdb_headers, data=query.encode('utf-8'))
+
+        # Check if the request was successful
+        if response.status_code != 204:
+            return Response({"error": "SPARQL update failed"}, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response({"message": "Bulk upload and SPARQL update successful"}, status=status.HTTP_200_OK)
+
+class DownloadRDFView(APIView):
+    def get(self, request):
+        # Define the URL for the GraphDB repository
+        url = f"http://{settings.GRAPHDB['HOST']}:{settings.GRAPHDB['PORT']}/repositories/main-repo/rdf-graphs/service?default"
+
+        # Send a GET request to the GraphDB repository
+        response = requests.get(url, headers={"Accept": "application/rdf+xml"})
+
+        # Check if the request was successful
+        if response.status_code == 200:
+            # Create a temporary file and write the RDF data to it
+            temp_file_path = f"temp_{uuid4()}.rdf"
+            with open(temp_file_path, "w") as temp_file:
+                temp_file.write(response.text)
+
+            # Create a FileResponse to send the RDF file
+            file_response = FileResponse(open(temp_file_path, 'rb'), content_type='application/rdf+xml')
+            file_response['Content-Disposition'] = f'attachment; filename={temp_file_path}'
+            return file_response
+
+        else:
+            # If the request was not successful, return an error message
+            return Response({"error": "Could not download RDF file from GraphDB."}, status=status.HTTP_400_BAD_REQUEST)
+        
+
 
 class SearchYAGOView(APIView):
     serializer_class = SearchYAGOSerializer

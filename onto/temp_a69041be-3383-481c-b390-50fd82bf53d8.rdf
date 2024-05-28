@@ -1,0 +1,870 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+	xmlns:agg="http://jena.apache.org/ARQ/function/aggregate#"
+	xmlns:sail="http://www.openrdf.org/config/sail#"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:geof="http://www.opengis.net/def/function/geosparql/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+	xmlns:fn="http://www.w3.org/2005/xpath-functions"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:spif="http://spinrdf.org/spif#"
+	xmlns:path="http://www.ontotext.com/path#"
+	xmlns:array="http://www.w3.org/2005/xpath-functions/array"
+	xmlns:apf="http://jena.apache.org/ARQ/property#"
+	xmlns:rep="http://www.openrdf.org/config/repository#"
+	xmlns:map="http://www.w3.org/2005/xpath-functions/map"
+	xmlns:sr="http://www.openrdf.org/config/repository/sail#"
+	xmlns:rdf4j="http://rdf4j.org/schema/rdf4j#"
+	xmlns:wgs="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	xmlns:gn="http://www.geonames.org/ontology#"
+	xmlns:afn="http://jena.apache.org/ARQ/function#"
+	xmlns:list="http://jena.apache.org/ARQ/list#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:ofn="http://www.ontotext.com/sparql/functions/"
+	xmlns:geoext="http://rdf.useekm.com/ext#"
+	xmlns:graphdb="http://www.ontotext.com/config/graphdb#"
+	xmlns:sesame="http://www.openrdf.org/schema/sesame#"
+	xmlns:math="http://www.w3.org/2005/xpath-functions/math"
+	xmlns:omgeo="http://www.ontotext.com/owlim/geo#">
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#type">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#subPropertyOf">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#subClassOf">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#domain">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#range">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2002/07/owl#equivalentProperty">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2002/07/owl#equivalentClass">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://proton.semanticweb.org/protonsys#transitiveOver">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2002/07/owl#inverseOf">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#subject">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#object">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#first">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#rest">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#value">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#comment">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#label">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Datatype"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2002/07/owl#differentFrom">
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Datatype"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#string">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Datatype"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#_1">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#ContainerMembershipProperty"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://schema.org/alternateName">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/2005_Polish_parliamentary_election">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/2005_Polish_presidential_election">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Freedom_Union__u0028_Poland_u0029_">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Eurovision_Song_Contest_2005">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://example.com/hasYear">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://example.com/2005">
+	<rdf:type rdf:resource="http://example.com/Year"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://example.com/21">
+	<rdf:type rdf:resource="http://example.com/Century"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://example.com/hasCentury">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Augusto_Pinochet">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://example.com/2006">
+	<rdf:type rdf:resource="http://example.com/Year"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Half-Life_2_u003A__Episode_One">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Igor_Śmiałowski">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Leon_Niemczyk">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/2006_u2013_07_FIS_Alpine_Ski_World_Cup">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Comet_McNaught">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Heroes_of_Might_and_Magic_V_u003A__Hammers_of_Fate">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/2001_Polish_parliamentary_election">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://example.com/2001">
+	<rdf:type rdf:resource="http://example.com/Year"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/24__u0028_TV_series_u0029_">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/George_W_u002E__Bush">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Half-Life_u003A__Blue_Shift">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Half-Life_u003A__Decay">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Laura_Bush">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/World_Trade_Center__u0028_1973_u2013_2001_u0029_">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Anthony_Quinn">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Euporie__u0028_moon_u0029_">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Jan_Lenica">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Trinculo__u0028_moon_u0029_">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Domo_u2013_Farm_Frites">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Joy_Ride__u0028_2001_film_u0029_">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/1184__u0028_album_u0029_">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/1995_French_presidential_election">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://example.com/1995">
+	<rdf:type rdf:resource="http://example.com/Year"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://example.com/20">
+	<rdf:type rdf:resource="http://example.com/Century"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Jacques_Chirac">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/_u0028_6427_u0029__1995_FY">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Ingrid_von_Rosen">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Franco_Fabrizi">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Louis_Malle">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Star_Trek_u003A__Voyager">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Guardians__u0028_video_game_u0029_">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Theresa_Clay">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Up_u002C__Down_u002C__Fragile">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Hackers__u0028_film_u0029_">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Eazy-E">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Malcolm_Munthe">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Royal_Rumble__u0028_1995_u0029_">
+	<rdf:type rdf:resource="http://example.com/Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#type">
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#type"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#subPropertyOf">
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#subPropertyOf"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#subClassOf">
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#domain">
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#domain"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#range">
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#range"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2002/07/owl#equivalentProperty">
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#subPropertyOf"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2002/07/owl#equivalentClass">
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://proton.semanticweb.org/protonsys#transitiveOver">
+	<rdfs:subPropertyOf rdf:resource="http://proton.semanticweb.org/protonsys#transitiveOver"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2002/07/owl#inverseOf">
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#inverseOf"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#comment">
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#comment"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#label">
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#label"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#isDefinedBy">
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#seeAlso"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://schema.org/alternateName">
+	<rdfs:subPropertyOf rdf:resource="http://schema.org/alternateName"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://example.com/hasYear">
+	<rdfs:subPropertyOf rdf:resource="http://example.com/hasYear"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://example.com/hasCentury">
+	<rdfs:subPropertyOf rdf:resource="http://example.com/hasCentury"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#Alt">
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Container"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag">
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Container"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq">
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Container"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#ContainerMembershipProperty">
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral">
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#Datatype">
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#string">
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#subClassOf">
+	<rdfs:domain rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#subject">
+	<rdfs:domain rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate">
+	<rdfs:domain rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#object">
+	<rdfs:domain rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#first">
+	<rdfs:domain rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#rest">
+	<rdfs:domain rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#subClassOf">
+	<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#domain">
+	<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#range">
+	<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#rest">
+	<rdfs:range rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#comment">
+	<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#label">
+	<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#type">
+	<transitiveOver xmlns="http://proton.semanticweb.org/protonsys#" rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#subPropertyOf">
+	<transitiveOver xmlns="http://proton.semanticweb.org/protonsys#" rdf:resource="http://www.w3.org/2000/01/rdf-schema#subPropertyOf"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#subClassOf">
+	<transitiveOver xmlns="http://proton.semanticweb.org/protonsys#" rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2002/07/owl#equivalentProperty">
+	<transitiveOver xmlns="http://proton.semanticweb.org/protonsys#" rdf:resource="http://www.w3.org/2002/07/owl#equivalentProperty"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2002/07/owl#equivalentClass">
+	<transitiveOver xmlns="http://proton.semanticweb.org/protonsys#" rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2002/07/owl#equivalentProperty">
+	<owl:inverseOf rdf:resource="http://www.w3.org/2002/07/owl#equivalentProperty"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2002/07/owl#equivalentClass">
+	<owl:inverseOf rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2002/07/owl#inverseOf">
+	<owl:inverseOf rdf:resource="http://www.w3.org/2002/07/owl#inverseOf"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2002/07/owl#differentFrom">
+	<owl:inverseOf rdf:resource="http://www.w3.org/2002/07/owl#differentFrom"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Freedom_Union__u0028_Poland_u0029_">
+	<rdfs:comment>political party in Poland (1994-2005)</rdfs:comment>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Augusto_Pinochet">
+	<rdfs:comment>Dictator, General, politician of Chile (1915-2006)</rdfs:comment>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Half-Life_2_u003A__Episode_One">
+	<rdfs:comment>2006 first-person shooter video game</rdfs:comment>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Igor_Śmiałowski">
+	<rdfs:comment>Polish actor (1917-2006)</rdfs:comment>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Leon_Niemczyk">
+	<rdfs:comment>Polish actor (1923-2006)</rdfs:comment>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/2006_u2013_07_FIS_Alpine_Ski_World_Cup">
+	<rdfs:comment>2006–2007 season of the FIS Alpine Skiing World Cup</rdfs:comment>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Heroes_of_Might_and_Magic_V_u003A__Hammers_of_Fate">
+	<rdfs:comment>2006 video game</rdfs:comment>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/24__u0028_TV_series_u0029_">
+	<rdfs:comment>American television series (2001–2010, 2014)</rdfs:comment>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/George_W_u002E__Bush">
+	<rdfs:comment>president of the United States from 2001 to 2009</rdfs:comment>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Half-Life_u003A__Blue_Shift">
+	<rdfs:comment>2001 video game</rdfs:comment>
+	<rdfs:comment>2001 expansion pack for the video game Half-Life</rdfs:comment>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Half-Life_u003A__Decay">
+	<rdfs:comment>2001 video game</rdfs:comment>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Laura_Bush">
+	<rdfs:comment>American educator and First Lady of the United States (2001—2009)</rdfs:comment>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/World_Trade_Center__u0028_1973_u2013_2001_u0029_">
+	<rdfs:comment>former skyscraper complex in Manhattan, New York (1968-2001)</rdfs:comment>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Anthony_Quinn">
+	<rdfs:comment>Mexican and American actor (1915–2001)</rdfs:comment>
+	<rdfs:comment>Mexican actor (1915–2001)</rdfs:comment>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Jan_Lenica">
+	<rdfs:comment>Polish artist (1928-2001)</rdfs:comment>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Domo_u2013_Farm_Frites">
+	<rdfs:comment>Belgian cycling team (2001-2002)</rdfs:comment>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Joy_Ride__u0028_2001_film_u0029_">
+	<rdfs:comment>2001 film directed by John Dahl</rdfs:comment>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/1184__u0028_album_u0029_">
+	<rdfs:comment>2001 studio album by Windir</rdfs:comment>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/1995_French_presidential_election">
+	<rdfs:comment>1995 presidential election in France</rdfs:comment>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Jacques_Chirac">
+	<rdfs:comment>President of France from 1995 to 2007</rdfs:comment>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Ingrid_von_Rosen">
+	<rdfs:comment>Swedish writer (1930-1995)</rdfs:comment>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Franco_Fabrizi">
+	<rdfs:comment>Italian actor (1916-1995)</rdfs:comment>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Louis_Malle">
+	<rdfs:comment>French film director, screenwriter, and producer (1932-1995)</rdfs:comment>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Star_Trek_u003A__Voyager">
+	<rdfs:comment>1995 American science fiction television series</rdfs:comment>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Guardians__u0028_video_game_u0029_">
+	<rdfs:comment>1995 video game</rdfs:comment>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Theresa_Clay">
+	<rdfs:comment>British entomologist (1911-1995)</rdfs:comment>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Up_u002C__Down_u002C__Fragile">
+	<rdfs:comment>1995 film by Jacques Rivette</rdfs:comment>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Hackers__u0028_film_u0029_">
+	<rdfs:comment>1995 American crime film</rdfs:comment>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Eazy-E">
+	<rdfs:comment>American rapper (1964–1995)</rdfs:comment>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Malcolm_Munthe">
+	<rdfs:comment>British Army officer (1910-1995)</rdfs:comment>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Royal_Rumble__u0028_1995_u0029_">
+	<rdfs:comment>WWF's 1995 Royal Rumble pay-per-view</rdfs:comment>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/2005_Polish_parliamentary_election">
+	<rdfs:label>2005 Polish parliamentary election</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/2005_Polish_presidential_election">
+	<rdfs:label>Polish presidential election, 2005</rdfs:label>
+	<rdfs:label>2005 Polish presidential election</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Eurovision_Song_Contest_2005">
+	<rdfs:label>Eurovision Song Contest 2005</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Comet_McNaught">
+	<rdfs:label>C/2006 P1</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/2001_Polish_parliamentary_election">
+	<rdfs:label>2001 Polish parliamentary election</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/1995_French_presidential_election">
+	<rdfs:label>1995 French presidential election</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/_u0028_6427_u0029__1995_FY">
+	<rdfs:label>(6427) 1995 FY</rdfs:label>
+	<rdfs:label>1995 FY</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/2005_Polish_parliamentary_election">
+	<alternateName xmlns="http://schema.org/">Polish parliamentary election, 2005</alternateName>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/2005_Polish_presidential_election">
+	<alternateName xmlns="http://schema.org/">Polish presidential election, 2005</alternateName>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Eurovision_Song_Contest_2005">
+	<alternateName xmlns="http://schema.org/">ESC 2005</alternateName>
+	<alternateName xmlns="http://schema.org/">Eurovision 2005</alternateName>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/2006_u2013_07_FIS_Alpine_Ski_World_Cup">
+	<alternateName xmlns="http://schema.org/">2006–07 FIS Alpine Ski World Cup</alternateName>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Comet_McNaught">
+	<alternateName xmlns="http://schema.org/">2006 P1</alternateName>
+	<alternateName xmlns="http://schema.org/">C/2006 P1 McNaught</alternateName>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/2001_Polish_parliamentary_election">
+	<alternateName xmlns="http://schema.org/">Polish parliamentary election, 2001</alternateName>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/World_Trade_Center__u0028_1973_u2013_2001_u0029_">
+	<alternateName xmlns="http://schema.org/">World Trade Center (1973–2001)</alternateName>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Euporie__u0028_moon_u0029_">
+	<alternateName xmlns="http://schema.org/">S/2001 J 10</alternateName>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Trinculo__u0028_moon_u0029_">
+	<alternateName xmlns="http://schema.org/">S/2001 U 1</alternateName>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/1995_French_presidential_election">
+	<alternateName xmlns="http://schema.org/">French presidential election, 1995</alternateName>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/2005_Polish_parliamentary_election">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/2005"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/2005_Polish_presidential_election">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/2005"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Freedom_Union__u0028_Poland_u0029_">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/2005"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Eurovision_Song_Contest_2005">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/2005"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Augusto_Pinochet">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/2006"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Half-Life_2_u003A__Episode_One">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/2006"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Igor_Śmiałowski">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/2006"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Leon_Niemczyk">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/2006"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/2006_u2013_07_FIS_Alpine_Ski_World_Cup">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/2006"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Comet_McNaught">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/2006"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Heroes_of_Might_and_Magic_V_u003A__Hammers_of_Fate">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/2006"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/2001_Polish_parliamentary_election">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/2001"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/24__u0028_TV_series_u0029_">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/2001"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/George_W_u002E__Bush">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/2001"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Half-Life_u003A__Blue_Shift">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/2001"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Half-Life_u003A__Decay">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/2001"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Laura_Bush">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/2001"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/World_Trade_Center__u0028_1973_u2013_2001_u0029_">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/2001"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Anthony_Quinn">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/2001"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Euporie__u0028_moon_u0029_">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/2001"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Jan_Lenica">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/2001"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Trinculo__u0028_moon_u0029_">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/2001"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Domo_u2013_Farm_Frites">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/2001"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Joy_Ride__u0028_2001_film_u0029_">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/2001"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/1184__u0028_album_u0029_">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/2001"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/1995_French_presidential_election">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/1995"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Jacques_Chirac">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/1995"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/_u0028_6427_u0029__1995_FY">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/1995"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Ingrid_von_Rosen">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/1995"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Franco_Fabrizi">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/1995"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Louis_Malle">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/1995"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Star_Trek_u003A__Voyager">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/1995"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Guardians__u0028_video_game_u0029_">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/1995"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Theresa_Clay">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/1995"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Up_u002C__Down_u002C__Fragile">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/1995"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Hackers__u0028_film_u0029_">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/1995"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Eazy-E">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/1995"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Malcolm_Munthe">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/1995"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://yago-knowledge.org/resource/Royal_Rumble__u0028_1995_u0029_">
+	<hasYear xmlns="http://example.com/" rdf:resource="http://example.com/1995"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://example.com/2005">
+	<hasCentury xmlns="http://example.com/" rdf:resource="http://example.com/21"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://example.com/2006">
+	<hasCentury xmlns="http://example.com/" rdf:resource="http://example.com/21"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://example.com/2001">
+	<hasCentury xmlns="http://example.com/" rdf:resource="http://example.com/21"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://example.com/1995">
+	<hasCentury xmlns="http://example.com/" rdf:resource="http://example.com/20"/>
+</rdf:Description>
+
+</rdf:RDF>

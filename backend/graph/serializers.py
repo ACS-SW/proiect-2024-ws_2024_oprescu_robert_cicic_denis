@@ -15,3 +15,6 @@ class SearchYAGOSerializer(serializers.Serializer):
     limit = serializers.IntegerField()
     lang = serializers.ChoiceField(choices=LANG_CHOICES)
     offset = serializers.IntegerField(default=0)
+    
+class BulkUploadSerializer(serializers.Serializer):
+    file = serializers.FileField()
