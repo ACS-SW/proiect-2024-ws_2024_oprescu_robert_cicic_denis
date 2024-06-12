@@ -57,8 +57,7 @@ class BulkUploadView(APIView):
             WHERE {{
                 GRAPH <{new_graph_uri}> {{
                     ?s ?p ?o .
-                    BIND(xsd:integer(SUBSTR(STR(?o), 1, 4)) AS ?yearValue)
-                    FILTER (?yearValue >= 1000 && ?yearValue <= 9999)
+                    ?o AS ?yearValue)
                     BIND (IRI(concat(str(ex:), str(?yearValue))) AS ?year)
                     BIND (IRI(concat(str(ex:), str(FLOOR((?yearValue - 1) / 100 + 1)))) AS ?century)
                 }}
